@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tester</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="semanticui/semantic.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="node_modules/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="node_modules/backbone/backbone-min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+
+    <script type="text/javascript" src="js/recording.model.js"></script>
+    <script type="text/javascript" src="js/recording.view.js"></script>
+    <script type="text/javascript" src="js/filter.view.js"></script>
+    <script type="text/javascript" src="js/zoekerapp.js"></script>
+
+    <style type="text/css">
+        body > .ui.container {
+          padding: 2em 1em;
+        }
+    </style>
+</head>
+<script>
+    function _reload(){
+            var child,
+                child_process = require("child_process"),
+                gui = require('nw.gui'),
+                win = gui.Window.get();
+            if (process.platform == "darwin")  {
+                child = child_process.spawn("nw", ["."], {detached:true});
+            } else {
+                child = child_process.spawn(process.execPath, [], {detached: true});
+            }
+            child.unref();
+            win.hide();
+            gui.App.quit();
+    }
+    nw.Window.get().showDevTools();
+    require('fs').watch('./', { persistent: false, recursive: true }, _reload);
+
+    var App = new ZoekerApp();
+
+    $(document).ready(function () { App.init(); });
+
+</script>
+<body>
+<div class="ui container fluid">
+    <div class="ui divided grid">
+        <div class="row">
+              <div class="six wide column">
+                  <div class="ui massive fluid icon input">
+                    <i class="search icon"></i>
+                    <input type="text" placeholder="Zoeken op...">
+                </div>
+                <div id="recordings" class="ui devided items">
+                    <div id="recording_template" class="item recording">
+                        <div class="ui tiny image">
+                            <img src="/images/wireframe/image.png">
+                        </div>
+                        <div class="middle aligned content">
+                            <a class="header">12 Years a Slave</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ten wide column">
+                    <div class="ui info message">
+                        <i class="info icon"></i>
+                        Zoek eerst op een naam, woord of programma en klik daarna op een gevonden opname om hier meer informatie te zien!
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="position:fixed; bottom: 0; left: 0; width: 100%; padding: 5px; text-align: center;">
+    <button class="ui primary fluid button" onclick="_reload();">Reload</button>
+</div>
+</body>
+</html>
