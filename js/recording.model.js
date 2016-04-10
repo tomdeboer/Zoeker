@@ -14,7 +14,8 @@ var RecordingModel = Backbone.Model.extend({
 		Backbone.Model.prototype.constructor.apply(this, arguments);
 
 		this._filepath = filepath;
-		this.set('programName', _path.basename(filepath));
+		this.set('id', _path.basename(filepath));
+		this.set('programName', this.get('id'));
 	},
   	parse: function () {
 		if ( ! _fs.statSync(this._filename)) {

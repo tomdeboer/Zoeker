@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Tester</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="semanticui/semantic.css" rel="stylesheet">
@@ -12,6 +13,7 @@
     <script type="text/javascript" src="js/recording.model.js"></script>
     <script type="text/javascript" src="js/recording.view.js"></script>
     <script type="text/javascript" src="js/filter.view.js"></script>
+    <script type="text/javascript" src="js/detail.view.js"></script>
     <script type="text/javascript" src="js/zoekerapp.js"></script>
 
     <style type="text/css">
@@ -64,10 +66,38 @@
                 </div>
             </div>
             <div class="ten wide column">
-                    <div class="ui info message">
-                        <i class="info icon"></i>
-                        Zoek eerst op een naam, woord of programma en klik daarna op een gevonden opname om hier meer informatie te zien!
+                <div id="info_message" class="ui info message">
+                    <i class="info icon"></i>
+                    Zoek eerst op een naam, woord of programma en klik daarna op een gevonden opname om hier meer informatie te zien!
+                </div>
+
+                 <div id="recording" class="ui vertically divided grid">
+                    <div class="ten wide column">
+                        <img class="ui fluid rounded image" src="img/img_placeholder.png">
                     </div>
+                    <div class="six wide column">
+                        <h4 class="ui horizontal divider header"><i class="icon info circle"></i> Opname</h4>
+                        <p>Woensdag 17 september</p>
+                        <p>1 uur en 5 minuten</p>
+                        <p>
+                            <a class="ui green label">HD</a>
+                            <a class="ui red label">Nederand 2</a>
+                        </p>
+
+                        <h4 class="ui horizontal divider header"><i class="icon file video outline"></i> Bestand</h4>
+                        <p><button class="ui fluid green button">Afspelen</button></p>
+                        <p><button class="ui fluid orange button">Knippen</button></p>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <h2 class="programName">NTR College Tour</h2>
+                            <p>
+                                Educatief programma (tt888, HD, herh. van 10-5-2013). Afl.: Alexander Klöpping 3.0. DWDD University presenteert: De Wereld van Klöpping 3.0.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

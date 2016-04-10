@@ -40,7 +40,21 @@ ZoekerApp.prototype.init = function () {
         $recording_template: $("#recording_template").remove().attr('id','').clone(),
         collection: this.recordings
     });
+    this.filterView.once('selected', function () {
+        $("#info_message").remove();
+    });
+    this.filterView.on('selected', function (recording) {
+        if (this.detailView) {
+            this.detailView.destory();
+        }
+        this.detailView = new DetailView({
+            model: recording,
+            el: $("#recording")
+        }).render();
+    });
 
+
+    // $("#recording").hide();
 
     this.scanDir();
 
