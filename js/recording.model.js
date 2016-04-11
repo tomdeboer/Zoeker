@@ -10,7 +10,6 @@ var RecordingModel = Backbone.Model.extend({
 		channelName: "?channel?",
 		description: "?description?"
 	},
-
 	constructor: function(filepath) {
 		Backbone.Model.prototype.constructor.apply(this, arguments);
 
@@ -38,11 +37,13 @@ var RecordingModel = Backbone.Model.extend({
 			var programName = buf.toString("utf-8", 666, 666+49);
 			var description = buf.toString("binary", 1343, 1343+255);
 
-			self.set('dateStart', start);
-			self.set('dateStop', stop);
-			self.set('channelName', channelName || self.channelName);
-			self.set('programName', programName || self.programName);
-			self.set('description', description || "Geen omschrijving");
+			self.set({
+				'dateStart': start,
+				'dateStop': stop,
+				'channelName': channelName || self.channelName,
+				'programName': programName || self.programName,
+				'description': description || "Geen omschrijving"
+			});
 		});
 
 

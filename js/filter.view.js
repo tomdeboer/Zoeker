@@ -45,6 +45,7 @@ var FilterView = Backbone.View.extend({
 	},
 	addRecording: function (recording) {
 		console.log("Adding:", recording, recording.get('id'));
+
 		var $rec = this.$recording_template.clone().data("recording_id", recording.get('id'));
 		var view = new RecordingView({el: $rec, model: recording});
 		view.render();
@@ -53,7 +54,6 @@ var FilterView = Backbone.View.extend({
 		this._views.push(view);
 	},
 	selectRecording: function (event) {
-		console.log(arguments)
 		var $el = $(event.currentTarget);
 		var rec = this.collection.get($el.data('recording_id'));
 		this.trigger("selected", rec);

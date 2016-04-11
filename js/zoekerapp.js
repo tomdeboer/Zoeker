@@ -70,16 +70,18 @@ ZoekerApp.prototype.scanDir = function () {
         }
 
         dir = dir + "/";
+        var recordings = [];
 
         _fs.readdir(dir, function (err, files) {
             files.forEach(function (filename) {
-                console.log(filename);
                 if (!/\.hmt$/.test(filename)) {
                     return;
                 }
+                console.log(filename);
                 var path = dir + filename;
-                self.recordings.add(new RecordingModel(path));
+                recordings.push(new RecordingModel(path));
             });
+            self.recordings.add(recordings);
         });
     });
 }
