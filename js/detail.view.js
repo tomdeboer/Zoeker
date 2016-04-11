@@ -9,5 +9,6 @@ var DetailView = Backbone.View.extend({
 		console.log("Rendering...", this.model, this.model.get('programName'));
 		this.$('.programName').text(this.model.get('programName'));
 		this.$('.description').text(this.model.get('description'));
+		this.$('.channelName').text(this.model.get('channelName'));
 	}
 });

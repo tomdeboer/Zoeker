@@ -34,11 +34,13 @@ var RecordingModel = Backbone.Model.extend({
 
 			var start = new Date(buf.readUInt32LE(0x280) * 1000);
 			var stop  = new Date(buf.readUInt32LE(0x284) * 1000);
-			var programName = buf.toString("utf-8", 666, 666+48);
+			var channelName = buf.toString("utf-8", 913, 913+31);
+			var programName = buf.toString("utf-8", 666, 666+47);
 			var description = buf.toString("binary", 1343, 1343+255);
 
 			self.set('dateStart', start);
 			self.set('dateStop', stop);
+			self.set('channelName', channelName || self.channelName);
 			self.set('programName', programName || self.programName);
 			self.set('description', description || "Geen omschrijving");
 		});
