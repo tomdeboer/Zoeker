@@ -17,6 +17,10 @@ var FilterView = Backbone.View.extend({
 
 		// React to new recordings being added
 		this.collection.on('add', this.addRecording.bind(this));
+		// Select the first added recording
+		this.collection.once('add', function () {
+			this._views[0].$el.click();
+		}.bind(this))
 	},
 	filter: function (event) {
 		// #filter_input's value
