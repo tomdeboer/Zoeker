@@ -8,6 +8,7 @@
     <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="node_modules/underscore/underscore-min.js"></script>
     <script type="text/javascript" src="node_modules/backbone/backbone-min.js"></script>
+    <script type="text/javascript" src="node_modules/fuzzy/lib/fuzzy.js"></script>
     <script type="text/javascript" src="index.js"></script>
 
     <script type="text/javascript" src="js/recording.model.js"></script>
@@ -49,15 +50,15 @@
 <div class="ui container fluid">
     <div class="ui divided grid">
         <div class="row">
-              <div class="six wide column">
-                  <div class="ui massive fluid icon input">
+          <div id="filter_box" class="six wide column">
+                <div class="ui massive fluid icon input">
                     <i class="search icon"></i>
-                    <input type="text" placeholder="Zoeken op...">
+                    <input type="text" id="filter_input" placeholder="Zoeken op...">
                 </div>
                 <div id="recordings" class="ui devided items">
                     <div id="recording_template" class="item recording">
                         <div class="ui tiny image">
-                            <img src="/images/wireframe/image.png">
+                            <img src="img/img_placeholder.png">
                         </div>
                         <div class="middle aligned content">
                             <a class="header">12 Years a Slave</a>
@@ -97,9 +98,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-        </div>
+    </div>
     </div>
 </div>
 <div style="position:fixed; bottom: 0; left: 0; width: 100%; padding: 5px; text-align: center;">

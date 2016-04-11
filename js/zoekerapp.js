@@ -2,7 +2,7 @@
 
 var _fs = require('fs');
 
-var config = { dir: [] };
+var config = { dirs: [] };
 
 try {
     // Load user config and merge it App.config
@@ -36,7 +36,8 @@ ZoekerApp.prototype.init = function () {
     console.log("Init!");
 
     this.filterView = new FilterView({
-        el: $("#recordings"),
+        el: $("#filter_box"),
+        $recordings: $("#recordings"), 
         $recording_template: $("#recording_template").remove().attr('id','').clone(),
         collection: this.recordings
     });
