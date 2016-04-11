@@ -20,7 +20,6 @@ function _fileexists(filepath) {
     try {
         return !!_fs.statSync(filepath);
     } catch (err) {
-        console.error(err);
         return false;
     }
 }
@@ -75,7 +74,7 @@ ZoekerApp.prototype.scanDir = function () {
         _fs.readdir(dir, function (err, files) {
             files.forEach(function (filename) {
                 console.log(filename);
-                if (!/\.ts$/.test(filename)) {
+                if (!/\.hmt$/.test(filename)) {
                     return;
                 }
                 var path = dir + filename;
