@@ -1,7 +1,5 @@
 "use strict"
 
-var _fs = require('fs');
-
 var config = { dirs: [] };
 
 try {

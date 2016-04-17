@@ -9,5 +9,6 @@ var RecordingView = Backbone.View.extend({
 		console.log("Rendering...", this.model, this.model.get('programName'));
 		this.$('.programName').text(this.model.get('programName'));
 		this.$('.channelName').text(this.model.get('channelName'));
+		this.$('.thumbnail').attr('src', this.model.get('imgFile') ? "file://" + this.model.get('imgFile') : placeholderImage);
 	}
 });

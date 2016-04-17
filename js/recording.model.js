@@ -1,9 +1,13 @@
 var _fs = require('fs');
 var _path = require('path');
 
+let extension = /(\w)*$/;
+
 var RecordingModel = Backbone.Model.extend({
-	_filepath: "",
 	defaults: {
+		tsFile: "",
+		hmtFile: "",
+		imgFile: "",
 		dateStart: null,
 		dateStop: null,
 		programName: "?program?",
@@ -13,18 +17,42 @@ var RecordingModel = Backbone.Model.extend({
 	constructor: function(filepath) {
 		Backbone.Model.prototype.constructor.apply(this, arguments);
 
-		this._filepath = filepath;
-		this.set('id', _path.basename(filepath));
+
+		this.set('hmtFile', filepath);
+		this.set('tsFile' , filepath.replace(extension, 'ts'));
+		this.set('id'     , _path.basename(filepath));
+
 		this.set('programName', this.get('id'));
+
+		this.tmp_imgFile = filepath.replace(extension, 'png');
+		if (_fileexists(this.tmp_imgFile)) {
+			this.set("imgFile", this.tmp_imgFile);
+			delete this.tmp_imgFile;
+		} else if (_fileexists(this.get('tsFile'))) {
+			setTimeout(this.generateImage.bind(this), 0);
+		}
 
 		setTimeout(this.parse.bind(this), 0);
 	},
+	generateImage: function (generate_if_not_exists) {
+		_child.execFile('ffmpeg', [
+			'-i', this.get('tsFile'),
+			'-ss', '00:00:05',
+			'-vframes' , 1,
+			this.tmp_imgFile
+		], function (err, stdout, stderr) {
+			if (err) throw err;
+
+			this.set('imgFile', this.tmp_imgFile);
+			delete this.tmp_imgFile;
+		}.bind(this));
+	},
   	parse: function () {
   		// dir/filename-minus-extension.hmt
-  		var hmt_filepath = _path.dirname(this._filepath) + "/" + _path.basename(this._filepath, _path.extname(this._filepath)) + ".hmt";
+  		var hmt_filepath = this.get('hmtFile');
 
 		if ( ! _fileexists(hmt_filepath)) {
-			console.warn(".htm file not found: ", hmt_filepath);
+			console.warn(".hmt file not found: ", hmt_filepath);
 			return false;
 		}
 
