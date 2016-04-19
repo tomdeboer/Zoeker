@@ -38,6 +38,7 @@ var RecordingModel = Backbone.Model.extend({
 		_child.execFile('ffmpeg', [
 			'-i', this.get('tsFile'),
 			'-ss', '00:00:05',
+			'-vf', 'scale=640:-1',
 			'-vframes' , 1,
 			this.tmp_imgFile
 		], function (err, stdout, stderr) {
