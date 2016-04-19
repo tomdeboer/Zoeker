@@ -21,6 +21,16 @@
         body > .ui.container {
           padding: 1rem;
         }
+        #recordings .recording {
+            cursor: pointer;
+            margin: 0.5em 0;
+            padding: 0.5em;
+            width: auto;
+        }
+        #recordings .recording.selected,
+        #recordings .recording:hover {
+            background-color: #eee;
+        }
     </style>
 </head>
 <script>
@@ -63,7 +73,7 @@
                         <div class="middle aligned content">
                             <div class="programName">Naam van opname</div>
                             <div class="meta">
-                                <span class="channelName">channel</span>
+                                <small class="channelName">channel</small>
                             </div>
                         </div>
                     </div>

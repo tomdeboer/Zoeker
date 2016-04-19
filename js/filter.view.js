@@ -54,6 +54,13 @@ var FilterView = Backbone.View.extend({
 		this._views.push(view);
 	},
 	selectRecording: function (event) {
+		// Remove old .selected class
+		var old_el = this.$recordings[0].querySelector('.selected');
+		if (old_el) old_el.classList.remove('selected')
+		// Find new selected recording
+		var new_el = event.currentTarget;
+		new_el.classList.add('selected');
+
 		var $el = $(event.currentTarget);
 		var rec = this.collection.get($el.data('recording_id'));
 		this.trigger("selected", rec);
