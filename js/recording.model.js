@@ -17,12 +17,11 @@ var RecordingModel = Backbone.Model.extend({
 	constructor: function(filepath) {
 		Backbone.Model.prototype.constructor.apply(this, arguments);
 
-
 		this.set('hmtFile', filepath);
 		this.set('tsFile' , filepath.replace(extension, 'ts'));
 		this.set('id'     , _path.basename(filepath));
 
-		this.set('programName', this.get('id'));
+		this.set('programName', this.get('id').replace(/[\$!#&@% ]*/, '').replace(/_+[0-9]+.*$/, ''));
 
 		this.tmp_imgFile = filepath.replace(extension, 'png');
 		if (_fileexists(this.tmp_imgFile)) {
@@ -63,14 +62,12 @@ var RecordingModel = Backbone.Model.extend({
 			var start = new Date(buf.readUInt32LE(0x280) * 1000);
 			var stop  = new Date(buf.readUInt32LE(0x284) * 1000);
 			var channelName = buf.toString("utf-8", 913, 913+31);
-			var programName = buf.toString("utf-8", 666, 666+49);
 			var description = buf.toString("binary", 1343, 1343+255);
 
 			self.set({
 				'dateStart': start,
 				'dateStop': stop,
 				'channelName': channelName || self.channelName,
-				'programName': programName || self.programName,
 				'description': description || "Geen omschrijving"
 			});
 		});
