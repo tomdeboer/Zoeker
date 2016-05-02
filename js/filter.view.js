@@ -24,18 +24,41 @@ var FilterView = Backbone.View.extend({
 	},
 	filter: function (event) {
 		// #filter_input's value
-		var string = event.currentTarget.value;
+		var searchString = event.currentTarget.value;
+
+		// Create regular expressions
+		var terms = searchString.split(',').map(function (str) {
+			return str.trim();
+		}).filter(function(str) {
+			return str.length;
+		}).map(function (str) {
+			var x = str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+			// return new RegExp("(?:[\W]|^)" + x + "(?:[\W]|$)", "i");
+			return new RegExp(x, "i");
+		});
+
+		console.log(terms);
+
+		// Filter callback
+		function filter(string) {
+			var i;
+			for(i = 0; i < terms.length; ++i)
+				if (!string.match(terms[i]))
+					return false;
+
+			return true;
+		}
 
 		// If string is empty, show all recordings
-		if (string.length < 1) {
+		if (searchString.length < 1) {
 			this._views.forEach(function (recording_view) {
 				recording_view.$el.show();
 			});
 			return;
 		}
-		// Match all recordings agains string
+		// Match all recordings via filter()
 		this._views.forEach(function (recording_view) {
-			if (fuzzy.test(string, recording_view.model.get('programName'))) {
+			if (filter(recording_view.model.get('programName'))) {
 				recording_view.$el.show();
 			} else {
 				recording_view.$el.hide();
