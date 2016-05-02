@@ -9,6 +9,9 @@
     <script type="text/javascript" src="node_modules/underscore/underscore-min.js"></script>
     <script type="text/javascript" src="node_modules/backbone/backbone-min.js"></script>
     <script type="text/javascript" src="node_modules/fuzzy/lib/fuzzy.js"></script>
+    <script type="text/javascript" src="node_modules/moment/moment.js"></script>
+    <script type="text/javascript" src="node_modules/moment/locale/nl.js"></script>
+
     <script type="text/javascript" src="index.js"></script>
 
     <script type="text/javascript" src="js/recording.model.js"></script>
@@ -27,6 +30,11 @@
             padding: 0.5em;
             width: auto;
         }
+            .recording .duration {
+                float: right;
+                font-size: small;
+                color: #667;
+            }
         #recordings .recording.selected,
         #recordings .recording:hover {
             background-color: #eee;
@@ -71,9 +79,9 @@
                             <img class="thumbnail" src="img/img_placeholder.png">
                         </div>
                         <div class="middle aligned content">
-                            <div class="programName">Naam van opname</div>
-                            <div class="meta">
-                                <small class="channelName">channel</small>
+                            <div>
+                                <span class="programName">Naam van opname</span>
+                                <span class="duration">0h 0m</span>
                             </div>
                         </div>
                     </div>
@@ -91,8 +99,8 @@
                     </div>
                     <div class="six wide column" style="padding-left: 0">
                         <h5 class="ui horizontal divider header"><i class="icon info circle"></i> Opname</h5>
-                        <p>Woensdag 17 september</p>
-                        <p>1 uur en 5 minuten</p>
+                        <p class="dateStart">Woensdag 17 september</p>
+                        <p class="duration">1 uur en 5 minuten</p>
                         <p>
                             <a class="ui red label channelName">Channel 99</a>
                         </p>
