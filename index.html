@@ -20,8 +20,10 @@
     <script type="text/javascript" src="js/zoekerapp.js"></script>
 
     <style type="text/css">
-        body > .ui.container {
-          padding: 1rem;
+        .wrapper, html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
         }
         #recordings .recording {
             cursor: pointer;
@@ -38,7 +40,27 @@
         #recordings .recording:hover {
             background-color: #eee;
         }
-    </style>
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+        #homerow {
+            flex:1;
+            display: flex;
+            overflow-x: scroll;
+        }
+        .col{
+            flex: 0 0 33%;
+            max-height: 100%;
+            overflow-y: scroll;
+            padding: 1em;
+            min-width: 335px;
+        }
+        #filter_box{
+            border: 1px solid #eee;
+            border-width: 0 1px;            
+        }
+</style>
 </head>
 <script>
     function _reload(){
@@ -64,17 +86,18 @@
 
 </script>
 <body>
-<div class="ui container fluid">
-    <div class="ui divided grid">
-        <div class="row">
-          <div id="filter_box" class="six wide column">
+<div class="wrapper">
+    <div id="homerow">
+          <div class="col" id="col1">
+          </div>
+          <div class="col" id="filter_box">
                 <div class="ui big fluid icon input">
                     <i class="search icon"></i>
                     <input type="text" id="filter_input" placeholder="Zoeken op...">
                 </div>
                 <div id="recordings" class="ui devided items">
                     <div id="recording_template" class="item recording">
-                        <div class="ui tiny image">
+                        <div class="ui mini image">
                             <img class="thumbnail" src="img/img_placeholder.png">
                         </div>
                         <div class="middle aligned content">
@@ -86,7 +109,7 @@
                     </div>
                 </div>
             </div>
-            <div class="ten wide column">
+            <div class="col" id="col3">
                 <div id="info_message" class="ui info message">
                     <i class="info icon"></i>
                     Zoek eerst op een naam, woord of programma en klik daarna op een gevonden opname om hier meer informatie te zien!
@@ -119,10 +142,9 @@
                 </div>
             </div>
     </div>
-    </div>
 </div>
 <div style="position:fixed; bottom: 0; left: 0; width: 100%; padding: 5px; text-align: center;">
-    <button class="ui primary fluid button" onclick="_reload();">Reload</button>
+    <button class="ui primary fluid button" onclick="window.location.reload();">Reload</button>
 </div>
 </body>
 </html>
